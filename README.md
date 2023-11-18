@@ -1,6 +1,6 @@
 # NodeToButtonTemplate
 
-This Blender add-on is a utility to make it easier to convert a geometry node into a really simple add-on with one big button to APPLY and UNDO. (Note - the "apply" button only adds the geometry node to the modifier stack, it is intentionally non-destructive).
+This Blender add-on is a utility to make it easier to convert a geometry node into a really simple add-on with one big button in the N-Panel to APPLY and UNDO. (Note - the "apply" button only adds the geometry node to the modifier stack, it is intentionally non-destructive).
 
 
     Step 1: Create and name your geometry nodegroup in Blender.
