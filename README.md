@@ -5,7 +5,8 @@ This Blender add-on is a utility to make it easier to convert a geometry node in
 
     Step 1: Create and name your geometry nodegroup in Blender.
 
-    Step 2: Use NodeToPython add-on (not included - it's here: https://github.com/BrendanParmer/NodeToPython)
+    Step 2: Use NodeToPython add-on
+    https://github.com/BrendanParmer/NodeToPython
     to generate a python script and copy to clipboard
 
     Step 3: Paste script into the nbt_geonodes.py file to replace where
