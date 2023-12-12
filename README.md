@@ -9,8 +9,9 @@ This Blender add-on is a utility to make it easier to convert a geometry node in
     https://github.com/BrendanParmer/NodeToPython
     to generate a python script and copy to clipboard
 
-    Step 3: Paste script into the nbt_geonodes.py file to replace where
-    the sample voronoi creation script is currently parked. (I took my 
+    Step 3: Duplicate this repository in a new folder and open in your favorite IDE. (I use VSC). 
+    Paste the python script into the nbt_geonodes.py file to replace where the sample
+    voronoi creation script is currently parked. (I took my 
     voronoiThis addon script and generalized it for the purpose of creating
     this template. Just delete that script & plug in your own!)
 
