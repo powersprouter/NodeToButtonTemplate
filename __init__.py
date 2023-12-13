@@ -32,7 +32,7 @@
 
 
 bl_info = {
-    "name" : "Node Name",        #Template: replace with Node Name - this will be addon name
+    "name" : "SPIN",        #Template: replace with Node Name - this will be addon name
     "author" : "powersprouter",
     "description" : "modifies mesh object with node group",
     "blender" : (3, 6, 0),
@@ -42,11 +42,11 @@ bl_info = {
     "category" : "Object"
 }
 import bpy
-from . nbt_ops import nbt_OT_Apply_node_name_Operator, nbt_OT_Undo_node_name_Operator, nbt_OT_Create_node_name_Geonode_Operator #Template - replace node_name in Operator names with node_name (lowercase)
+from . nbt_ops import nbt_OT_Apply_ducky_Operator, nbt_OT_Undo_ducky_Operator, nbt_OT_Create_ducky_Geonode_Operator #Template - replace node_name in Operator names with node_name (lowercase)
 from . nbt_panel import nbt_PT_Panel
 
 
-classes = (nbt_OT_Apply_node_name_Operator, nbt_OT_Undo_node_name_Operator, nbt_PT_Panel, nbt_OT_Create_node_name_Geonode_Operator)  #Template - replace node_name in Operator names with node_name (lowercase)
+classes = (nbt_OT_Apply_ducky_Operator, nbt_OT_Undo_ducky_Operator, nbt_PT_Panel, nbt_OT_Create_ducky_Geonode_Operator)  #Template - replace node_name in Operator names with node_name (lowercase)
 
 def register():
     for c in classes:
