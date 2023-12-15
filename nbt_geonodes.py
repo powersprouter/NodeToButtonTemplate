@@ -994,5 +994,5 @@ def ducky_node_group():
 	ducky.links.new(group_input.outputs[9], map_range_002.inputs[4])
 	return ducky
 
-ducky = ducky_node_group()
+
 
