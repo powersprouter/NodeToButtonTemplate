@@ -16,7 +16,7 @@ import bpy
 from . nbt_geonodes import ducky_node_group  #Template - node_name + _node_group
 from bpy.types import Context, Operator
 
-class nbt_OT_Create_ducky_Geonode_Operator(Operator):   #Template - replace with node_name
+class nbt_OT_Create_Ducky_Geonode_Operator(Operator):   #Template - replace with node_name
     bl_idname = "object.create_ducky_geonode"     #Template - node_name with _geonode
     bl_label = "create geonode"
     bl_description = "Installs function geonode group"
@@ -27,7 +27,7 @@ class nbt_OT_Create_ducky_Geonode_Operator(Operator):   #Template - replace with
         return {"FINISHED"}
 
 
-class nbt_OT_Apply_ducky_Operator(Operator):          #Template - replace with node_name
+class nbt_OT_Apply_Ducky_Operator(Operator):          #Template - replace with node_name
     bl_idname = "object.apply_ducky"                  #Template - replace with node_name
     bl_label = "modify object"
     bl_description = "Press to add modifier to active object"
@@ -65,7 +65,7 @@ class nbt_OT_Apply_ducky_Operator(Operator):          #Template - replace with n
 
         return {"FINISHED"}
     
-class nbt_OT_Undo_ducky_Operator(Operator):         #Template - replace with node_name  
+class nbt_OT_Undo_Ducky_Operator(Operator):         #Template - replace with node_name  
     bl_idname = "object.undo_ducky"                 #Template - replace with node_name
     bl_label = "undo function to object"
     bl_description = "Press to remove geomodifier from active"
