@@ -8,7 +8,7 @@
 
 
 import bpy
-from bpy.types import Context, Operator
+#from bpy.types import Context, Operator
 
 
 
