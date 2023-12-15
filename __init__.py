@@ -36,7 +36,7 @@ bl_info = {
     "author" : "powersprouter",
     "description" : "modifies mesh object with node group",
     "blender" : (3, 6, 0),
-    "version" : (0, 0, 1),
+    "version" : (0, 0, 2),
     "location" : "View3D",
     "warning" : "",
     "category" : "Object"
