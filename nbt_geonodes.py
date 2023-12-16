@@ -245,7 +245,7 @@ def ducky_node_group():
 	#node Transform Geometry
 	transform_geometry = ducky.nodes.new("GeometryNodeTransform")
 	#Translation
-	transform_geometry.inputs[1].default_value = (0.10000000149011612, 0.0, 0.0)
+	transform_geometry.inputs[1].default_value = (0.0, 0.0, 0.0)
 	#Scale
 	transform_geometry.inputs[3].default_value = (1.0, 1.0, 1.0)
 

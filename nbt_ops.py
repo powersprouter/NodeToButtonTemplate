@@ -60,7 +60,7 @@ class nbt_OT_Apply_Ducky_Operator(Operator):          #Template - replace with n
         bpy.data.node_groups.remove(modifier.node_group)
         modifier.node_group = bpy.data.node_groups['Ducky']  #Template - replace with 'Node Name'
         bpy.ops.screen.frame_jump(end=False)
-        bpy.ops.screen.animation_play()
+        
     
 
 

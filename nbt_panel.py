@@ -38,3 +38,7 @@ class nbt_PT_Panel(bpy.types.Panel):
             box.operator("object.undo_ducky", text="UNDO") #template: Replace with undo_node_name
         except:
             box.operator("object.apply_ducky", text="APPLY") #template: Replace with undo_node_name
+        
+        row = layout.row()
+        row.label(text="Spin")
+        #row.operator("screen.animation_play()")
