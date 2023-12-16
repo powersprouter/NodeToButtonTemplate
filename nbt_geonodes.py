@@ -309,10 +309,10 @@ def ducky_node_group():
 	#curve 0
 	float_curve_001_curve_0 = float_curve_001.mapping.curves[0]
 	float_curve_001_curve_0_point_0 = float_curve_001_curve_0.points[0]
-	float_curve_001_curve_0_point_0.location = (1.1641532182693481e-09, 0.0)
+	float_curve_001_curve_0_point_0.location = (0.0, 0.0)
 	float_curve_001_curve_0_point_0.handle_type = 'AUTO_CLAMPED'
 	float_curve_001_curve_0_point_1 = float_curve_001_curve_0.points[1]
-	float_curve_001_curve_0_point_1.location = (0.04109583795070648, 0.03869002312421799)
+	float_curve_001_curve_0_point_1.location = (0.03, 0.04)
 	float_curve_001_curve_0_point_1.handle_type = 'AUTO'
 	float_curve_001_curve_0_point_2 = float_curve_001_curve_0.points.new(0.2625569701194763, 0.7767852544784546)
 	float_curve_001_curve_0_point_2.handle_type = 'AUTO_CLAMPED'
@@ -531,7 +531,7 @@ def ducky_node_group():
 
 	#input Start KeyFrame ZWindup
 	ducky.inputs.new('NodeSocketFloat', "Start KeyFrame ZWindup")
-	ducky.inputs[2].default_value = 1.0
+	ducky.inputs[2].default_value = 2.0
 	ducky.inputs[2].min_value = -10000.0
 	ducky.inputs[2].max_value = 10000.0
 	ducky.inputs[2].attribute_domain = 'POINT'
