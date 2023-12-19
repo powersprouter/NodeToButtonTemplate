@@ -55,7 +55,7 @@ class nbt_OT_Apply_Ducky_Operator(Operator):          #Template - replace with n
             bpy.ops.object.create_ducky_geonode()   #Template - replace with node_name_geonode
             print("ducky geonode now loaded")
 
-        modifier = active_obj.modifiers.new("GeoNode", "NODES")
+        modifier = active_obj.modifiers.new("Ducky_GeoNode", "NODES")
         bpy.ops.node.new_geometry_node_group_assign()
         bpy.data.node_groups.remove(modifier.node_group)
         modifier.node_group = bpy.data.node_groups['Ducky']  #Template - replace with 'Node Name'
@@ -86,7 +86,7 @@ class nbt_OT_Undo_Ducky_Operator(Operator):         #Template - replace with nod
     
     def execute(self, context):
         active_obj = context.view_layer.objects.active
-        bpy.ops.object.modifier_remove(modifier="GeoNode")
+        bpy.ops.object.modifier_remove(modifier="Ducky_GeoNode")
 
 
         return {"FINISHED"}

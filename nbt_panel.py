@@ -29,16 +29,25 @@ class nbt_PT_Panel(bpy.types.Panel):
         layout = self.layout
         row = layout.row()
         obj = context.object
-        box = layout.box()
-        box.scale_y = 4
+        scene = bpy.context.scene
+        screen = bpy.context.screen
         active_obj = context.view_layer.objects.active
 
-        try:
-            active_obj.modifiers['GeoNode']
-            box.operator("object.undo_ducky", text="UNDO") #template: Replace with undo_node_name
-        except:
-            box.operator("object.apply_ducky", text="APPLY") #template: Replace with undo_node_name
-        
         row = layout.row()
-        row.label(text="Spin")
-        #row.operator("screen.animation_play()")
+        try:
+            active_obj.modifiers['Ducky_GeoNode']
+            #active_obj.modifiers.data.node_groups['Ducky']
+            row.operator("object.undo_ducky", text="REMOVE DUCKY",icon='VIEW_PAN') #template: Replace with undo_node_name
+        except:
+            row.operator("object.apply_ducky", text="APPLY DUCKY",icon='FILE_REFRESH') #template: Replace with undo_node_name
+
+        box = layout.box()
+        box.scale_y = 4
+        if not screen.is_animation_playing:
+            box.operator("screen.animation_play",text="Play animation")
+        else:
+            box.operator("screen.animation_play",text="Stop animation")
+
+        
+        
+        
