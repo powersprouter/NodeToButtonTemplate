@@ -59,6 +59,8 @@ class nbt_OT_Apply_Ducky_Operator(Operator):          #Template - replace with n
         bpy.ops.node.new_geometry_node_group_assign()
         bpy.data.node_groups.remove(modifier.node_group)
         modifier.node_group = bpy.data.node_groups['Ducky']  #Template - replace with 'Node Name'
+        bpy.context.scene.frame_end = 150
+
         bpy.ops.screen.frame_jump(end=False)
         
     
