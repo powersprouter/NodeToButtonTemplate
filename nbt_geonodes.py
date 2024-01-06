@@ -994,5 +994,118 @@ def ducky_node_group():
 	ducky.links.new(group_input.outputs[9], map_range_002.inputs[4])
 	return ducky
 
+# ___________________________________________________________________________
+
+
+#initialize turntable node group
+def turntable_node_group():
+	turntable= bpy.data.node_groups.new(type = 'GeometryNodeTree', name = "Turntable")
+
+	#initialize turntable nodes
+	#turntable outputs
+	#output Geometry
+	turntable.outputs.new('NodeSocketGeometry', "Geometry")
+	turntable.outputs[0].attribute_domain = 'POINT'
+
+
+	#node Group Output
+	group_output = turntable.nodes.new("NodeGroupOutput")
+
+	#node Transform Geometry
+	transform_geometry = turntable.nodes.new("GeometryNodeTransform")
+	#Translation
+	transform_geometry.inputs[1].default_value = (0.0, 0.0, 0.0)
+	#Scale
+	transform_geometry.inputs[3].default_value = (1.0, 1.0, 1.0)
+
+	#node Combine XYZ
+	combine_xyz = turntable.nodes.new("ShaderNodeCombineXYZ")
+	#X
+	combine_xyz.inputs[0].default_value = 0.0
+	#Y
+	combine_xyz.inputs[1].default_value = 0.0
+
+	#node Scene Time
+	scene_time = turntable.nodes.new("GeometryNodeInputSceneTime")
+
+	#node Math.001
+	math_001 = turntable.nodes.new("ShaderNodeMath")
+	math_001.operation = 'RADIANS'
+	#Value_001
+	math_001.inputs[1].default_value = 0.5
+	#Value_002
+	math_001.inputs[2].default_value = 0.5
+
+	#node Math
+	math = turntable.nodes.new("ShaderNodeMath")
+	math.label = "single rotation for 150 frames"
+	math.operation = 'DIVIDE'
+	#Value_001
+	math.inputs[1].default_value = 0.4166666567325592
+	#Value_002
+	math.inputs[2].default_value = 0.5
+
+	#turntable inputs
+	#input Geometry
+	turntable.inputs.new('NodeSocketGeometry', "Geometry")
+	turntable.inputs[0].attribute_domain = 'POINT'
+
+	#input speed
+	turntable.inputs.new('NodeSocketInt', "speed")
+	turntable.inputs[1].default_value = 1
+	turntable.inputs[1].min_value = -2147483648
+	turntable.inputs[1].max_value = 2147483647
+	turntable.inputs[1].attribute_domain = 'POINT'
+
+
+	#node Group Input
+	group_input = turntable.nodes.new("NodeGroupInput")
+
+	#node Math.002
+	math_002 = turntable.nodes.new("ShaderNodeMath")
+	math_002.label = "speed"
+	math_002.operation = 'MULTIPLY'
+	#Value_002
+	math_002.inputs[2].default_value = 0.5
+
+
+	#Set locations
+	group_output.location = (1039.353271484375, 40.083099365234375)
+	transform_geometry.location = (668.404541015625, 88.68504333496094)
+	combine_xyz.location = (458.14263916015625, -51.61049270629883)
+	scene_time.location = (-610.4947509765625, -56.6162109375)
+	math_001.location = (235.9975128173828, -62.5918083190918)
+	math.location = (-400.23358154296875, -54.570499420166016)
+	group_input.location = (-400.92767333984375, 86.13099670410156)
+	math_002.location = (38.871490478515625, -87.02855682373047)
+
+	#Set dimensions
+	group_output.width, group_output.height = 140.0, 100.0
+	transform_geometry.width, transform_geometry.height = 140.0, 100.0
+	combine_xyz.width, combine_xyz.height = 140.0, 100.0
+	scene_time.width, scene_time.height = 140.0, 100.0
+	math_001.width, math_001.height = 140.0, 100.0
+	math.width, math.height = 140.0, 100.0
+	group_input.width, group_input.height = 140.0, 100.0
+	math_002.width, math_002.height = 140.0, 100.0
+
+	#initialize turntable links
+	#transform_geometry.Geometry -> group_output.Geometry
+	turntable.links.new(transform_geometry.outputs[0], group_output.inputs[0])
+	#group_input.Geometry -> transform_geometry.Geometry
+	turntable.links.new(group_input.outputs[0], transform_geometry.inputs[0])
+	#scene_time.Frame -> math.Value
+	turntable.links.new(scene_time.outputs[1], math.inputs[0])
+	#math_001.Value -> combine_xyz.Z
+	turntable.links.new(math_001.outputs[0], combine_xyz.inputs[2])
+	#combine_xyz.Vector -> transform_geometry.Rotation
+	turntable.links.new(combine_xyz.outputs[0], transform_geometry.inputs[2])
+	#math_002.Value -> math_001.Value
+	turntable.links.new(math_002.outputs[0], math_001.inputs[0])
+	#math.Value -> math_002.Value
+	turntable.links.new(math.outputs[0], math_002.inputs[0])
+	#group_input.speed -> math_002.Value
+	turntable.links.new(group_input.outputs[1], math_002.inputs[1])
+	return turntable
 
 

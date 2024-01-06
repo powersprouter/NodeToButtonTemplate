@@ -36,17 +36,20 @@ bl_info = {
     "author" : "powersprouter",
     "description" : "modifies mesh object with node group",
     "blender" : (3, 6, 0),
-    "version" : (0, 0, 2),
+    "version" : (0, 0, 3),
     "location" : "View3D",
     "warning" : "",
     "category" : "Object"
 }
 import bpy
 from . nbt_ops import nbt_OT_Apply_Ducky_Operator, nbt_OT_Undo_Ducky_Operator, nbt_OT_Create_Ducky_Geonode_Operator #Template - replace node_name in Operator names with node_name (lowercase)
+from . nbt_ops import nbt_OT_Apply_Turntable_Operator, nbt_OT_Undo_Turntable_Operator, nbt_OT_Create_Turntable_Geonode_Operator #Template - replace node_name in Operator names with node_name (lowercase)
+
 from . nbt_panel import nbt_PT_Panel
 
 
-classes = (nbt_OT_Apply_Ducky_Operator, nbt_OT_Undo_Ducky_Operator, nbt_PT_Panel, nbt_OT_Create_Ducky_Geonode_Operator)  #Template - replace node_name in Operator names with node_name (lowercase)
+classes = (nbt_OT_Apply_Ducky_Operator, nbt_OT_Undo_Ducky_Operator, nbt_PT_Panel, nbt_OT_Create_Ducky_Geonode_Operator,
+           nbt_OT_Apply_Turntable_Operator, nbt_OT_Undo_Turntable_Operator, nbt_OT_Create_Turntable_Geonode_Operator)  #Template - replace node_name in Operator names with node_name (lowercase)
 
 def register():
     for c in classes:

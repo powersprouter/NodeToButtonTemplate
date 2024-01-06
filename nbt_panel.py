@@ -36,13 +36,23 @@ class nbt_PT_Panel(bpy.types.Panel):
         active_obj = context.view_layer.objects.active
     
 
+
         row = layout.row()
         try:
+            active_obj.modifiers['Turntable_GeoNode']
+            row.operator("object.undo_turntable", text="REMOVE TURNTABLE",icon='VIEW_PAN') #template: Replace with undo_node_name
+        except:
+            row.operator("object.apply_turntable", text="APPLY TURNTABLE",icon='FILE_REFRESH') #template: Replace with undo_node_name
+
+        row = layout.row()
+        
+        try:
             active_obj.modifiers['Ducky_GeoNode']
-            #active_obj.modifiers.data.node_groups['Ducky']
             row.operator("object.undo_ducky", text="REMOVE DUCKY",icon='VIEW_PAN') #template: Replace with undo_node_name
         except:
             row.operator("object.apply_ducky", text="APPLY DUCKY",icon='FILE_REFRESH') #template: Replace with undo_node_name
+
+
 
         box = layout.box()
         box.scale_y = 4
