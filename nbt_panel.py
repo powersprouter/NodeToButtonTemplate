@@ -20,7 +20,7 @@ class nbt_PT_Panel(bpy.types.Panel):
 
     """Creates a Panel in the N-Panel of the 3D viewport"""
     bl_label = "Spin!" #Template: Replace with string that describes what node will do - gets written above button
-    bl_idname = "OBJECT_PT_ducky" #Template: Replace with node_name (lower case with space underline)
+    bl_idname = "OBJECT_PT_spin" #Template: Replace with node_name (lower case with space underline)
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
     bl_category = 'Spin' #Template - Replace with Node Name - this is N-panel side bar label
@@ -40,12 +40,21 @@ class nbt_PT_Panel(bpy.types.Panel):
         row = layout.row()
         try:
             active_obj.modifiers['Turntable_GeoNode']
-            row.operator("object.undo_turntable", text="REMOVE TURNTABLE",icon='VIEW_PAN') #template: Replace with undo_node_name
+            row.operator("object.undo_turntable", text="REMOVE WENBO",icon='VIEW_PAN') #template: Replace with undo_node_name
         except:
-            row.operator("object.apply_turntable", text="APPLY TURNTABLE",icon='FILE_REFRESH') #template: Replace with undo_node_name
+            row.operator("object.apply_turntable", text="APPLY WENBO",icon='FILE_REFRESH') #template: Replace with undo_node_name
 
+# ______________________________________
         row = layout.row()
-        
+        try:
+            active_obj.modifiers['Derrk_GeoNode']
+            row.operator("object.undo_derrk", text="REMOVE DERRK",icon='VIEW_PAN') #template: Replace with undo_node_name
+        except:
+            row.operator("object.apply_derrk", text="APPLY DERRK",icon='FILE_REFRESH') #template: Replace with undo_node_name
+
+# ______________________________________
+        row = layout.row()
+
         try:
             active_obj.modifiers['Ducky_GeoNode']
             row.operator("object.undo_ducky", text="REMOVE DUCKY",icon='VIEW_PAN') #template: Replace with undo_node_name

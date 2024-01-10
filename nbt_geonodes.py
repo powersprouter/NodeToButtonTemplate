@@ -1108,4 +1108,213 @@ def turntable_node_group():
 	turntable.links.new(group_input.outputs[1], math_002.inputs[1])
 	return turntable
 
+# _________________________________________________________
+#initialize derrk node group
+def derrk_node_group():
+	derrk= bpy.data.node_groups.new(type = 'GeometryNodeTree', name = "Derrk")
+
+	#initialize derrk nodes
+	#derrk outputs
+	#output Geometry
+	derrk.outputs.new('NodeSocketGeometry', "Geometry")
+	derrk.outputs[0].attribute_domain = 'POINT'
+
+
+	#node Group Output
+	group_output = derrk.nodes.new("NodeGroupOutput")
+
+	#node Transform Geometry
+	transform_geometry = derrk.nodes.new("GeometryNodeTransform")
+	#Translation
+	transform_geometry.inputs[1].default_value = (0.0, 0.0, 0.0)
+	#Scale
+	transform_geometry.inputs[3].default_value = (1.0, 1.0, 1.0)
+
+	#node Combine XYZ
+	combine_xyz = derrk.nodes.new("ShaderNodeCombineXYZ")
+	#X
+	combine_xyz.inputs[0].default_value = 0.0
+	#Y
+	combine_xyz.inputs[1].default_value = 0.0
+
+	#node Math.001
+	math_001 = derrk.nodes.new("ShaderNodeMath")
+	math_001.operation = 'RADIANS'
+	#Value_001
+	math_001.inputs[1].default_value = 0.5
+	#Value_002
+	math_001.inputs[2].default_value = 0.5
+
+	#node Math.004
+	math_004 = derrk.nodes.new("ShaderNodeMath")
+	math_004.label = "rotations"
+	math_004.operation = 'MULTIPLY'
+	#Value_001
+	math_004.inputs[1].default_value = 1.0
+	#Value_002
+	math_004.inputs[2].default_value = 0.5
+
+	#node Map Range
+	map_range = derrk.nodes.new("ShaderNodeMapRange")
+	map_range.data_type = 'FLOAT'
+	map_range.interpolation_type = 'LINEAR'
+	#From Min
+	map_range.inputs[1].default_value = 0.0
+	#From Max
+	map_range.inputs[2].default_value = 1.0
+	#To Min
+	map_range.inputs[3].default_value = 0.0
+	#Steps
+	map_range.inputs[5].default_value = 4.0
+	#Vector
+	map_range.inputs[6].default_value = (0.0, 0.0, 0.0)
+	#From_Min_FLOAT3
+	map_range.inputs[7].default_value = (0.0, 0.0, 0.0)
+	#From_Max_FLOAT3
+	map_range.inputs[8].default_value = (1.0, 1.0, 1.0)
+	#To_Min_FLOAT3
+	map_range.inputs[9].default_value = (0.0, 0.0, 0.0)
+	#To_Max_FLOAT3
+	map_range.inputs[10].default_value = (1.0, 1.0, 1.0)
+	#Steps_FLOAT3
+	map_range.inputs[11].default_value = (4.0, 4.0, 4.0)
+
+	#node Float Curve
+	float_curve = derrk.nodes.new("ShaderNodeFloatCurve")
+	#mapping settings
+	float_curve.mapping.extend = 'EXTRAPOLATED'
+	float_curve.mapping.tone = 'STANDARD'
+	float_curve.mapping.black_level = (0.0, 0.0, 0.0)
+	float_curve.mapping.white_level = (1.0, 1.0, 1.0)
+	float_curve.mapping.clip_min_x = 0.0
+	float_curve.mapping.clip_min_y = 0.0
+	float_curve.mapping.clip_max_x = 1.0
+	float_curve.mapping.clip_max_y = 1.0
+	float_curve.mapping.use_clip = True
+	#curve 0
+	float_curve_curve_0 = float_curve.mapping.curves[0]
+	float_curve_curve_0_point_0 = float_curve_curve_0.points[0]
+	float_curve_curve_0_point_0.location = (0.0, 0.0)
+	float_curve_curve_0_point_0.handle_type = 'AUTO'
+	float_curve_curve_0_point_1 = float_curve_curve_0.points[1]
+	float_curve_curve_0_point_1.location = (0.30000001192092896, 0.10000000149011612)
+	float_curve_curve_0_point_1.handle_type = 'AUTO'
+	float_curve_curve_0_point_2 = float_curve_curve_0.points.new(0.699999988079071, 0.8999999761581421)
+	float_curve_curve_0_point_2.handle_type = 'AUTO'
+	float_curve_curve_0_point_3 = float_curve_curve_0.points.new(1.0, 1.0)
+	float_curve_curve_0_point_3.handle_type = 'AUTO'
+	#update curve after changes
+	float_curve.mapping.update()
+	#Factor
+	float_curve.inputs[0].default_value = 1.0
+
+	#node Value
+	value = derrk.nodes.new("ShaderNodeValue")
+	value.label = "degrees per play"
+
+	value.outputs[0].default_value = 360.0
+	#node Math.002
+	math_002 = derrk.nodes.new("ShaderNodeMath")
+	math_002.operation = 'MULTIPLY'
+	#Value_002
+	math_002.inputs[2].default_value = 0.5
+
+	#node Math.003
+	math_003 = derrk.nodes.new("ShaderNodeMath")
+	math_003.label = "duration (frames)"
+	math_003.operation = 'DIVIDE'
+	#Value_002
+	math_003.inputs[2].default_value = 0.5
+
+	#node Scene Time
+	scene_time = derrk.nodes.new("GeometryNodeInputSceneTime")
+
+	#node Math
+	math = derrk.nodes.new("ShaderNodeMath")
+	math.operation = 'DIVIDE'
+	#Value_002
+	math.inputs[2].default_value = 0.5
+
+	#derrk inputs
+	#input Geometry
+	derrk.inputs.new('NodeSocketGeometry', "Geometry")
+	derrk.inputs[0].attribute_domain = 'POINT'
+
+	#input Duration (frames)
+	derrk.inputs.new('NodeSocketFloat', "Duration (frames)")
+	derrk.inputs[1].default_value = 100.0
+	derrk.inputs[1].min_value = -10000.0
+	derrk.inputs[1].max_value = 10000.0
+	derrk.inputs[1].attribute_domain = 'POINT'
+
+
+	#node Group Input
+	group_input = derrk.nodes.new("NodeGroupInput")
+
+
+	#Set locations
+	group_output.location = (1585.353271484375, 40.083099365234375)
+	transform_geometry.location = (1214.404541015625, 88.68504333496094)
+	combine_xyz.location = (1004.1426391601562, -51.61049270629883)
+	math_001.location = (781.9974975585938, -62.5918083190918)
+	math_004.location = (321.98321533203125, -349.44573974609375)
+	map_range.location = (149.5, -131.2206268310547)
+	float_curve.location = (-166.39129638671875, -232.71817016601562)
+	value.location = (148.8822784423828, -427.5000305175781)
+	math_002.location = (388.6282958984375, -101.3564453125)
+	math_003.location = (562.0, -139.60137939453125)
+	scene_time.location = (-655.6907348632812, -179.972412109375)
+	math.location = (-393.2391357421875, -154.84109497070312)
+	group_input.location = (-637.8641357421875, 71.05402374267578)
+
+	#Set dimensions
+	group_output.width, group_output.height = 140.0, 100.0
+	transform_geometry.width, transform_geometry.height = 140.0, 100.0
+	combine_xyz.width, combine_xyz.height = 140.0, 100.0
+	math_001.width, math_001.height = 140.0, 100.0
+	math_004.width, math_004.height = 140.0, 100.0
+	map_range.width, map_range.height = 140.0, 100.0
+	float_curve.width, float_curve.height = 240.0, 100.0
+	value.width, value.height = 140.0, 100.0
+	math_002.width, math_002.height = 140.0, 100.0
+	math_003.width, math_003.height = 140.0, 100.0
+	scene_time.width, scene_time.height = 140.0, 100.0
+	math.width, math.height = 140.0, 100.0
+	group_input.width, group_input.height = 140.0, 100.0
+
+	#initialize derrk links
+	#transform_geometry.Geometry -> group_output.Geometry
+	derrk.links.new(transform_geometry.outputs[0], group_output.inputs[0])
+	#group_input.Geometry -> transform_geometry.Geometry
+	derrk.links.new(group_input.outputs[0], transform_geometry.inputs[0])
+	#math_001.Value -> combine_xyz.Z
+	derrk.links.new(math_001.outputs[0], combine_xyz.inputs[2])
+	#combine_xyz.Vector -> transform_geometry.Rotation
+	derrk.links.new(combine_xyz.outputs[0], transform_geometry.inputs[2])
+	#math_003.Value -> math_001.Value
+	derrk.links.new(math_003.outputs[0], math_001.inputs[0])
+	#math.Value -> float_curve.Value
+	derrk.links.new(math.outputs[0], float_curve.inputs[1])
+	#float_curve.Value -> map_range.Value
+	derrk.links.new(float_curve.outputs[0], map_range.inputs[0])
+	#scene_time.Frame -> math.Value
+	derrk.links.new(scene_time.outputs[1], math.inputs[0])
+	#map_range.Result -> math_002.Value
+	derrk.links.new(map_range.outputs[0], math_002.inputs[0])
+	#math_002.Value -> math_003.Value
+	derrk.links.new(math_002.outputs[0], math_003.inputs[0])
+	#value.Value -> math_004.Value
+	derrk.links.new(value.outputs[0], math_004.inputs[0])
+	#math_004.Value -> math_002.Value
+	derrk.links.new(math_004.outputs[0], math_002.inputs[1])
+	#group_input.Duration (frames) -> math_003.Value
+	derrk.links.new(group_input.outputs[1], math_003.inputs[1])
+	#group_input.Duration (frames) -> math.Value
+	derrk.links.new(group_input.outputs[1], math.inputs[1])
+	#group_input.Duration (frames) -> map_range.To Max
+	derrk.links.new(group_input.outputs[1], map_range.inputs[4])
+	return derrk
+
+
+
 
